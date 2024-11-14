@@ -29,10 +29,10 @@ spl_autoload_register(function ($class_name) {
 
 $stephking = new Auteur("Stephen","King");
 
-$l1 = new Livre("Ca","(1986)","1138");
-$l2 = new Livre("Simetierre","(1983)","374");
-$l3 = new Livre("Le Fléau","(1978)","823");
-$l4 = new Livre("Shining","(1977)","447");
+$l1 = new Livre("Ca","(1986)","1138",20);
+$l2 = new Livre("Simetierre","(1983)","374",15);
+$l3 = new Livre("Le Fléau","(1978)","823",14);
+$l4 = new Livre("Shining","(1977)","447",16);
 
 echo $stephking->fullName();
 
