@@ -64,8 +64,10 @@ class Livre {
     // Méthode pour obtenir la valeur complète
     public function fullValue(): string
     {
-        return "<p class ='bouqins'><strong>".$this->nom."</strong>"." ".$this->annee." ".$this->pages." pages / ".$this->prix." €</p><br>";
+        return "<div class='bibliographie'>
+        <p class ='bouqins'><strong>".$this->nom."</strong>"." ".$this->annee." ".$this->pages." pages / ".$this->prix." €</p><br>
+        </div>";
     }
-
+    
 }
 

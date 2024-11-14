@@ -9,10 +9,18 @@
         font-family: cursive;
     }
     .ecrivain{
+        font-family: cursive;
         font-size: xx-large;
         font-style: italic;
         color: whitesmoke;
         text-align: center;
+    }
+    .bibliographie{
+        border: solid whitesmoke 1px;
+        margin-left: 30%;
+        margin-right: 30%;
+        margin-bottom: 10px;
+        border-radius: 20px;
     }
     .bouqins{
         color: whitesmoke;
