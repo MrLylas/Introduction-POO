@@ -1,31 +1,25 @@
-<?php
-
-spl_autoload_register(function ($class_name) {
-    require 'classes/' . $class_name . '.php';
-});     
+<?php  
 
 class Titulaire{
     private string $nom;
     private string $prenom;
-    private string $ville;
     private DateTime $birthDate;
-    private int $bankAccount;
-
-    private array $comptes;
+    private string $ville;
+    private array $bankAccount;
 
     //Contructeur avec typage des paramètres 
-    public function __construct(string $nom,string $prenom,string $ville,int $bankAccount){
+    public function __construct(string $nom,string $prenom,string $birthDate,string $ville){
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->birthDate = new dateTime($birthDate);
-        $this->ville = $ville;
-        $this->bankAccount = $bankAccount;
+        $this->ville = $ville;   
+        $this->bankAccount = [];
     }
 
     /**
      * Get the value of nom
      */ 
-    public function getNom()
+    public function getNom():string
     {
         return $this->nom;
     }
@@ -45,7 +39,7 @@ class Titulaire{
     /**
      * Get the value of prenom
      */ 
-    public function getPrenom()
+    public function getPrenom():string
     {
         return $this->prenom;
     }
@@ -65,7 +59,7 @@ class Titulaire{
     /**
      * Get the value of ville
      */ 
-    public function getVille()
+    public function getVille():string
     {
         return $this->ville;
     }
@@ -101,11 +95,51 @@ class Titulaire{
 
         return $this;
     }
-
-    public function fullValue(): string
+    /**
+     * Get the value of birthDate
+     */ 
+    public function getBirthDate()
     {
-        return "<div class='bibliographie'>
-                    <p>".$this->nom." ".$this->prenom."<br>".$this->ville."<br>Compte(s) banquaire(s) : ".$this->bankAccount."</p><br>
-                </div>";
+        return $this->birthDate;
     }
+
+    /**
+     * Set the value of birthDate
+     *
+     * @return  self
+     */ 
+    public function setBirthDate(DateTime $birthDate)
+    {
+        $this->birthDate = $birthDate;
+
+        return $this;
+    }
+    //Calc age guest
+    public function calcAge()
+    {
+        $now = new DateTime();
+        $interval = $this->birthDate->diff($now);
+        $age = $interval->format("%Y");
+        return $age;
+
+    }
+    //Add account
+    public function addAccount(Compte $bankAccount){
+        $this->bankAccount[] = $bankAccount;
+    }
+    //convert user info to string  
+    public function __toString(){
+        return "$this->nom $this->prenom | " . $this->calcAge() . " ans | $this->ville ";
+    }
+    //User informations
+    public function getInfosTitulaire()
+    {
+        echo $this;
+        foreach($this->bankAccount as $account){
+            echo "<br>".$account;
+
+        }
+        echo "<br><br>";
+    }
+
 }

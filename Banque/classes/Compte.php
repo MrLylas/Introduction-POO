@@ -1,20 +1,17 @@
 <?php
 
-spl_autoload_register(function ($class_name) {
-    require 'classes/' . $class_name . '.php';
-});
-
 class Compte{
     private string $libelle;
-    private int $solde;
+    private float $solde;
     private string $devise;
-    private string $utilisateur;
+    private Titulaire $titulaire;
 
-    public function __construct(string $libelle,int $solde,string $devise,string $utilisateur){
+    public function __construct(string $libelle,int $solde,string $devise,Titulaire $titulaire){
         $this->libelle = $libelle;
         $this->solde = $solde;
         $this->devise = $devise;
-        $this->utilisateur = $utilisateur;
+        $this->titulaire = $titulaire;
+        $this->titulaire->addAccount($this);
     }
 
     /**
@@ -56,7 +53,7 @@ class Compte{
 
         return $this;
     }
-
+    
     /**
      * Get the value of devise
      */ 
@@ -64,7 +61,7 @@ class Compte{
     {
         return $this->devise;
     }
-
+    
     /**
      * Set the value of devise
      *
@@ -73,35 +70,61 @@ class Compte{
     public function setDevise($devise)
     {
         $this->devise = $devise;
-
+        
         return $this;
     }
-
+    
     /**
-     * Get the value of utilisateur
+     * Get the value of titulaire
      */ 
-    public function getUtilisateur()
+    public function getTitulaire()
     {
-        return $this->utilisateur;
+        return $this->titulaire;
     }
 
     /**
-     * Set the value of utilisateur
+     * Set the value of titulaire
      *
      * @return  self
      */ 
-    public function setUtilisateur($utilisateur)
+    public function setTitulaire($titulaire)
     {
-        $this->utilisateur = $utilisateur;
+        $this->titulaire = $titulaire;
 
         return $this;
     }
-    public function fullAccount(): string
+    //convert to string
+    public function __toString()
     {
-        return "<div class='account'>
-                    <p>".$this->libelle."<br>".$this->solde." ".$this->devise."<br>Compte(s) banquaire(s) : ".$this->utilisateur."</p><br>
-                </div>";
+        return "$this->libelle : $this->solde $this->devise";
     }
+    //Add money
+    public function addSolde(float $crediter){
+        $this->solde += $crediter;
+        echo "Ajout de $crediter €<br>";
+    }
+    //remove money 
+    public function removeSolde(float $debiter){
+        if ($debiter <=$this->solde){
+            $this->solde -= $debiter;
+            echo "Débité de $debiter";
+        }else echo "Débit impossible";
+    }
+    //send money
+    public function transfert(float $virement, Compte $bankAccount){
+        if ($virement < $this->solde){
+            $this->solde -= $virement;
+            $bankAccount->addSolde($virement);
+        }else{
+            "Virement impossible";
+        }
+    }
+    public function getInfosCompte()
+    {
+        return $this->getLibelle() . " " . $this->getSolde()." ".$this->getDevise()."<br><br>";
+    }
+
+
 }
 
 
