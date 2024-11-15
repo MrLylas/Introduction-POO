@@ -1,15 +1,23 @@
 <?php
 
+spl_autoload_register(function ($class_name) {
+    require 'classes/' . $class_name . '.php';
+});     
+
 class Titulaire{
     private string $nom;
     private string $prenom;
     private string $ville;
+    private DateTime $birthDate;
     private int $bankAccount;
+
+    private array $comptes;
 
     //Contructeur avec typage des paramètres 
     public function __construct(string $nom,string $prenom,string $ville,int $bankAccount){
         $this->nom = $nom;
         $this->prenom = $prenom;
+        $this->birthDate = new dateTime($birthDate);
         $this->ville = $ville;
         $this->bankAccount = $bankAccount;
     }

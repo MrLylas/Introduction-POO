@@ -1,5 +1,9 @@
 <?php
 
+spl_autoload_register(function ($class_name) {
+    require 'classes/' . $class_name . '.php';
+});
+
 class Compte{
     private string $libelle;
     private int $solde;

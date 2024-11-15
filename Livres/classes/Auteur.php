@@ -4,10 +4,12 @@ class Auteur {
     //déclaration des variables 
     private string $name;
     private string $prenom;
+    private array $livres;
 
     public function __construct(string $prenom, string $name){
         $this->name = $name;
         $this->prenom = $prenom;
+        $this->livres =[];
 
     }
     //Get the value of nom
@@ -36,14 +38,32 @@ class Auteur {
 
         return $this;
     }
+    //Get Full Name 
 
     public function fullName():string
     {
-        return "<h2 class ='ecrivain'>Livres de ".$this->prenom." ".$this->name."</h2><br>";
+        return $this->prenom." ".$this->name;
     }
-}
-    
 
+    //Result
+
+    public function afficherBibliographie(){
+        echo "<h2 class ='ecrivain'>Livres de ".$this->fullName()."</h2><br><br>";
+        foreach($this->livres as $book){ 
+              echo "<div class='bibliographie'>
+                    <p class ='bouqins'>". $book->getNom()." (".$book->getAnnee().") : ".$book->getPages()." pages / ".$book->getPrix()."€ <br>
+                    </div>";
+        }
+    }
+    //ajouter un livre
+    public function addLivre(Livre $livre){
+        $this->livres[] = $livre;
+    }
+    public function __toString(){
+        return $this->Prenom." ".$this->nom;
+    }
+    
+}
 
     
 

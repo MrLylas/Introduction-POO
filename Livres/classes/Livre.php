@@ -6,14 +6,17 @@ class Livre {
     private string $annee;
     private string $pages;
     private string $prix;
+    private Auteur $auteur;
     
 
     // Constructeur avec typage des paramètres
-    public function __construct(string $nom, string $annee, string $pages, float $prix){
+    public function __construct(string $nom, string $annee, string $pages, float $prix, Auteur $auteur){
         $this->nom = $nom;
         $this->annee = $annee;
         $this->pages = $pages;
         $this->prix = $prix;
+        $this->auteur = $auteur;
+        $this->auteur->addLivre($this);
     }
 
     // Getter pour l'année
@@ -62,12 +65,49 @@ class Livre {
         return $this;
     }
     // Méthode pour obtenir la valeur complète
-    public function fullValue(): string
+    
+    
+    /**
+     * Get the value of nom
+     */ 
+    public function getNom()
     {
-        return "<div class='bibliographie'>
-        <p class ='bouqins'><strong>".$this->nom."</strong>"." ".$this->annee." ".$this->pages." pages / ".$this->prix." €</p><br>
-        </div>";
+        return $this->nom;
     }
     
+    /**
+     * Set the value of nom
+     *
+     * @return  self
+     */ 
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+        
+        return $this;
+    }
+    
+    /**
+     * Get the value of auteur
+     */ 
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+    
+    /**
+     * Set the value of auteur
+     *
+     * @return  self
+     */ 
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+        
+        return $this;
+    }
+    public function __toString(){
+        return $this->nom.$this->annee."<br>";
+    }
 }
 
