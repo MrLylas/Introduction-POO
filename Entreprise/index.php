@@ -29,4 +29,7 @@ echo $poleEmploi-> afficherEmployer() ;
 
 echo $maxime-> afficherEntreprise() ;
 echo $stephane-> afficherEntreprise() ;
+var_dump($stephane);
 ?>
+
+
