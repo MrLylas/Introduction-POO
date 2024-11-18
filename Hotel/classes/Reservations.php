@@ -1,14 +1,17 @@
 <?php
 
 class Reservations{
-    private Chambres $chambres;
+    private Chambres $chambre;
     private Clients $clients;
     private DateTime $checkIn;
     private DateTime $checkOut;
     
-    public function __construct(Chambres $chambres ,Clients $clients, string $checkIn,string $checkOut){
-        $this->chambres = $chambres;
+    public function __construct(Chambres $chambre ,Clients $clients, string $checkIn,string $checkOut){
+        $this->chambre = $chambre;
+        $this->chambre->addReservations($this);
+        $this->chambre->getHotel()->addReservations($this);
         $this->clients = $clients;
+        $this->clients->addReservations($this);
         $this->checkIn = new dateTime($checkIn);
         $this->checkOut = new dateTime($checkOut);
     }
@@ -38,7 +41,7 @@ class Reservations{
          */ 
         public function getChambres()
         {
-            return $this->chambres;
+            return $this->chambre;
         }
     
         /**
@@ -46,9 +49,9 @@ class Reservations{
          *
          * @return  self
          */ 
-        public function setChambres($chambres)
+        public function setChambres($chambre)
         {
-            $this->chambres = $chambres;
+            $this->chambre = $chambre;
     
             return $this;
         }
@@ -91,6 +94,10 @@ class Reservations{
         $this->checkOut = $checkOut;
 
         return $this;
+    }
+    public function afficherDates(){
+        $date = "du ".$this->checkIn->format("d-m-Y")." au ".$this->checkOut->format("d-m-Y");
+        return $date;
     }
 
 }

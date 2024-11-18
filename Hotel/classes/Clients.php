@@ -3,11 +3,13 @@
 class Clients{
     private string $prenom;
     private string $nom;
+    private array $reservations;
 
 
     public function __construct(string $prenom,string $nom){
         $this->prenom = $prenom;
         $this->nom = $nom;
+        $this->reservations = [];
     }
 
 
@@ -49,5 +51,71 @@ class Clients{
         $this->nom = $nom;
 
         return $this;
+    }
+
+    /**
+     * Get the value of reservations
+     */ 
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    /**
+     * Set the value of reservations
+     *
+     * @return  self
+     */ 
+    public function setReservations($reservations)
+    {
+        $this->reservations = $reservations;
+
+        return $this;
+    }
+
+        /**
+     * Set the value of reservations
+     *
+     * 
+     */ 
+    public function addReservations(Reservations $reservations)
+    {
+        $this->reservations[] = $reservations;
+
+    }
+
+    //to string :
+
+    public function __toString()
+    {
+        return "$this->prenom $this->nom";
+    }
+
+    public function calculerSejour()
+    {
+        $total = 0;
+        foreach ($this->reservations as $reservation) {
+            $arrive = $reservation->getcheckIn();
+            $depart = $reservation->getcheckOut();
+            $interval = $arrive->diff($depart);
+
+            $total += $interval->d * $reservation->getChambres()->getPrix();
+        }
+        return $total;
+    }
+
+    public function afficherReservations()
+    {
+        $result = "<div class='container'><h3>Réservations de $this</h3><hr>
+                    <p class='nbresa'>" . count($this->reservations) . " Réservations</p>";
+        if (empty($this->reservations)) {
+            $result .= "<p>Aucune réservations !</p>";
+        } else {
+            foreach ($this->reservations as $reservation) {
+                $result .= "<p><span>Hotel : " . $reservation->getChambres()->getHotel() . "</span> / " . $reservation->getChambres()->afficherNumero() . " " . $reservation->getChambres()->getRoomInfos() . " " . $reservation->afficherDates() . "</p>";
+            }
+        }
+        $result .= "Total : " . $this->calculerSejour() . " €";
+        return $result."</div>";
     }
 }

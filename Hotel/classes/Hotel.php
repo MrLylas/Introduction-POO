@@ -7,6 +7,7 @@ class Hotel{
     private string $ville;
     private string $adress;
     private string $postal;
+    private array $chambres;
     private array $reservations;
     
     public function __construct(string $hotelName,string $stars,string $ville, string $adress,string $postal){
@@ -15,6 +16,7 @@ class Hotel{
         $this->ville = $ville;
         $this->adress = $adress;
         $this->postal = $postal;
+        $this->chambres = [];
         $this->reservations = [];
     }
      
@@ -120,22 +122,103 @@ class Hotel{
     }
 
     /**
-     * Get the value of roomsNb
+     * Get the value of chambres
      */ 
-    public function getRoomsNb()
+    public function getChambres()
     {
-        return $this->roomsNb;
+        return $this->chambres;
     }
 
     /**
-     * Set the value of roomsNb
+     * Set the value of chambres
      *
      * @return  self
      */ 
-    public function setRoomsNb($roomsNb)
+    public function setChambres($chambres)
     {
-        $this->roomsNb = $roomsNb;
+        $this->chambres = $chambres;
 
         return $this;
     }
+
+    public function addChambres(Chambres $chambre){
+        $this->chambres[] = $chambre;
+    }
+
+    /**
+     * Get the value of reservations
+     */ 
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    /**
+     * Set the value of reservations
+     *
+     * @return  self
+     */ 
+    public function setReservations($reservations)
+    {
+        $this->reservations = $reservations;
+
+        return $this;
+    }
+
+    public function getInfos(){
+        return "<div class='container'><h3>".$this."</h3>".
+                "<div class='adresse'><p>".$this->afficherAdress()."</p></div><hr>".
+                "<p class='infochambre'>Nombre de chambres : ".count($this->chambres)."</p>".
+                "<p class='infochambre'>Nombre de chambres réservées : ".count($this->reservations)."</p>".
+                "<p class='infochambre'>Nombre de chambres disponibles : ".count($this->chambres) - count($this->reservations)."</p></div>";
+    } 
+    public function addReservations(Reservations $reservations)
+    {
+        $this->reservations[] = $reservations;
+
+    }
+
+    public function __toString()
+    {
+        return "$this->hotelName"."$this->stars"."$this->ville";
+    }
+    
+    public function afficherAdress(){
+        return "$this->adress "."$this->postal "."$this->ville";
+    }
+
+
+    public function afficherReservations(){
+        $result = "<div class='container'><h3>$this</h3><hr>".
+                        "<p class='nbresa'>".count($this->reservations)." Réservations :</p>";
+                    if(empty($this->reservations)){
+                        $result .="<p>Aucune réservations</p>";
+                    } else {
+                        foreach($this->reservations as $reservation){
+                            $result .= "<p>Client :".$reservation->getClients()."-".$reservation->getChambres()->afficherNumero()."</p>";
+                        }
+                    }
+                    return $result."</div>";
+     }
+      public function afficherStatut(){
+        $result = "<div class='statut'><table>
+        <thead>
+            <tr>
+                <th scope='co'>Chambre</th>
+                <th scope='col'>PRIX</th>
+                <th scope='col'>WIFI</th>
+                <th scope='col'>ETAT</th>
+            </tr>
+        </thead>
+        <tbody>";
+        foreach($this->chambres as $chambre){   
+        $result .= "<tr>
+                    <td>".$chambre->afficherNumero()."</td>
+                    <td>".$chambre->getPrix()."€</td>
+                    <td>".$chambre->afficherIcon()."</td>
+                    <td>".$chambre->afficherEtat()."</td>";
+        }
+        $result .= "</tr></tbody></table></div>";
+        return $result;
+      }
 }
