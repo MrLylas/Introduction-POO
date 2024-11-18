@@ -165,6 +165,8 @@ class Hotel{
         return $this;
     }
 
+    //Récuperer infos sur l'hotel et sa disponibilité :
+
     public function getInfos(){
         return "<div class='container'><h3>".$this."</h3>".
                 "<div class='adresse'><p>".$this->afficherAdress()."</p></div><hr>".
@@ -172,6 +174,9 @@ class Hotel{
                 "<p class='infochambre'>Nombre de chambres réservées : ".count($this->reservations)."</p>".
                 "<p class='infochambre'>Nombre de chambres disponibles : ".count($this->chambres) - count($this->reservations)."</p></div>";
     } 
+
+    //ajouter réservation :
+
     public function addReservations(Reservations $reservations)
     {
         $this->reservations[] = $reservations;
@@ -182,11 +187,14 @@ class Hotel{
     {
         return "$this->hotelName"."$this->stars"."$this->ville";
     }
+
+    //afficher adresse hotel :
     
     public function afficherAdress(){
         return "$this->adress "."$this->postal "."$this->ville";
     }
 
+    //Afficher réservations :
 
     public function afficherReservations(){
         $result = "<div class='container'><h3>$this</h3><hr>".
@@ -200,6 +208,9 @@ class Hotel{
                     }
                     return $result."</div>";
      }
+
+     //aficher statuts des chambres :
+
       public function afficherStatut(){
         $result = "<div class='statut'><table>
         <thead>

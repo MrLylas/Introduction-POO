@@ -95,6 +95,9 @@ class Reservations{
 
         return $this;
     }
+
+    //afficher dates de réservations :
+
     public function afficherDates(){
         $date = "du ".$this->checkIn->format("d-m-Y")." au ".$this->checkOut->format("d-m-Y");
         return $date;

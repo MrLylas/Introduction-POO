@@ -91,6 +91,8 @@ class Clients{
         return "$this->prenom $this->nom";
     }
 
+    //fonction de calcul temps de séjour :
+
     public function calculerSejour()
     {
         $total = 0;
@@ -103,6 +105,8 @@ class Clients{
         }
         return $total;
     }
+
+    //afficher les réservations clients :
 
     public function afficherReservations()
     {
