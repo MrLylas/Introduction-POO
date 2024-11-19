@@ -8,7 +8,7 @@ class Hotel{
     private string $adress;
     private string $postal;
     private array $chambres;
-    private array $reservations;
+    // private array $reservations;
     
     public function __construct(string $hotelName,string $stars,string $ville, string $adress,string $postal){
         $this->hotelName = $hotelName;
@@ -17,7 +17,7 @@ class Hotel{
         $this->adress = $adress;
         $this->postal = $postal;
         $this->chambres = [];
-        $this->reservations = [];
+        // $this->reservations = [];
     }
      
 
@@ -166,56 +166,49 @@ class Hotel{
 
         return $this;
     }
+    
+    //Afficher réservations :
 
-    //Récuperer infos sur l'hotel et sa disponibilité :
-
-    public function getInfos(){
-        return "<div class='container'><h3>".$this."</h3>".
-                "<div class='adresse'><p>".$this->afficherAdress()."</p></div><hr><br>".
-                "<p class='infochambre'>Nombre de chambres : ".count($this->chambres)."</p><br>".
-                "<p class='infochambre'>Nombre de chambres réservées : ".count($this->reservations)."</p><br>".
-                "<p class='infochambre'>Nombre de chambres disponibles : ".count($this->chambres) - count($this->reservations)."</p><br></div>";
-    } 
-
-    //ajouter réservation :
-
-    public function addReservation(Reservation $reservation)
-    {
-        $this->reservations[] = $reservation;
-
+    public function afficherReservation(){
+        $count= 0;
+        foreach($this->chambres as $chambre){
+            foreach($chambre->getReservations() as $reservation){
+                $count++;
+            }
+        }
+        if($count <= 0){
+            return "Aucune reservation !";
+        }
+        else{
+        $nbEmptyRoom = (count($this->chambres) - $count);
+        return "Total de chambres :<br>".count($this->chambres)."<br>".
+                "<br> Nombre de chambres reservées: ".$count.
+                "<br> Nombre de chambres disponible ".$nbEmptyRoom."<br><br>";
+        }
     }
+    //Récuperer infos sur l'hotel et sa disponibilité :
+    
+    public function getInfos(){
+        return "<h3>".$this."</h3>".
+                "<p>".$this->afficherAdress()."</p><hr><br>".
+                "".$this->afficherReservation()."";
+    } 
 
     public function __toString()
     {
         return "$this->hotelName"."$this->stars"."$this->ville";
     }
 
+    
     //afficher adresse hotel :
     
     public function afficherAdress(){
         return "$this->adress "."$this->postal "."$this->ville";
     }
-
-    //Afficher réservations :
-
-    public function afficherReservation(){
-        $result = "<div class='container'><h3>$this</h3><hr><br>".
-                        "<p class='nbresa'>".count($this->reservations)." Réservations :</p><br>";
-                    if(empty($this->reservations)){
-                        $result .="<p>Aucune réservations</p><br>";
-                    } else {
-                        foreach($this->reservations as $reservation){
-                            $result .= "<p>Client :".$reservation->getClient()." - ".$reservation->getChambre()->afficherNumero()."</p><br>";
-                        }
-                    }
-                    return $result."</div>";
-     }
-
-
      //aficher statuts des chambres :
 
       public function afficherStatut(){
-        $result = "<div class='statut'><table>
+        $result = "<table>
         <thead>
             <tr>
                 <th scope='co'>Chambre</th>
@@ -232,7 +225,7 @@ class Hotel{
                     <td>".$chambre->afficherIcon()."</td>
                     <td>".$chambre->afficherEtat()."</td>";
         }
-        $result .= "</tr></tbody></table></div>";
+        $result .= "</tr></tbody></table>";
         return $result;
       }
 }

@@ -91,19 +91,28 @@ class Client{
         return "$this->prenom $this->nom";
     }
 
+    
     //afficher les réservations clients :
 
     public function afficherReservation()
     {
-        $result = "<div class='container'><h3>Réservations de $this</h3><hr><br>
+        $result = "<div><h3>Réservations de $this</h3><hr><br>
                     <p class='nbresa'>" . count($this->reservations) . " Réservations</p><br>";
         if (empty($this->reservations)) {
             $result .= "<p>Aucune réservations !</p>";
         } else {
             foreach ($this->reservations as $reservation) {
-                $result .= "<p><span>Hotel : " . $reservation->getChambre()->getHotel() . "</span> / " . $reservation->getChambre()->afficherNumero() . "<br>" . $reservation->getChambre()->getRoomInfos() . " " . $reservation->afficherDates() . "</p><br>";
+                $result .= "<p><span>Hotel : " . $reservation->getChambre()->getHotel() . "</span> / " . $reservation->getChambre()->afficherNumero() . "<br>" . $reservation->getChambre()->getRoomInfos() . " " . $reservation->afficherDates() . "</p></div><br>";
             }
         }
-        return $result."</div>";
+        return $result;
+    }
+
+    public function prixTotalClient(){
+
+        foreach ($this->reservations as $reservation){
+            $totaux = $reservation->calculerSejour();
+        }
+        return $totaux;
     }
 }

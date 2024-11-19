@@ -9,7 +9,6 @@ class Reservation{
     public function __construct(Chambre $chambre ,Client $client, string $checkIn,string $checkOut){
         $this->chambre = $chambre;
         $this->chambre->addReservation($this);
-        $this->chambre->getHotel()->addReservation($this);
         $this->client = $client;
         $this->client->addReservation($this);
         $this->checkIn = new dateTime($checkIn);
@@ -101,6 +100,15 @@ class Reservation{
     public function afficherDates(){
         $date = "du ".$this->checkIn->format("d-m-Y")." au ".$this->checkOut->format("d-m-Y");
         return $date;
+    }
+
+    
+    //Calculer prix reservation :
+
+    public function calculerSejour(){
+        $interval = $this->checkIn->diff($this->checkOut);
+        $prixTotal = $interval->format("%a") * $this->chambre->getPrix();
+        return $prixTotal;
     }
 
 }
