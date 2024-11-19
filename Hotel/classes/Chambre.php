@@ -17,6 +17,7 @@ class Chambre{
         $this->etat= $etat;
         $this->hotel = $hotel;
         $this->hotel->addChambre($this);
+        $this->reservations = [];
 
     }
     
