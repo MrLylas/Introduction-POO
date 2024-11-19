@@ -211,6 +211,7 @@ class Hotel{
                     return $result."</div>";
      }
 
+
      //aficher statuts des chambres :
 
       public function afficherStatut(){

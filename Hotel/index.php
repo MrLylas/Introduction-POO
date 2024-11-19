@@ -68,17 +68,3 @@ echo $client1->afficherReservation();
 echo $hilton->afficherStatut();
 
 
-
-//var_dump :
-
-// var_dump($hilton);
-// var_dump($regent);
-// var_dump($client1);
-// var_dump($client2);
-// var_dump($chambre17);
-// var_dump($resa1);
-// var_dump($resa2);
-// var_dump($resa3);
-
-
-
