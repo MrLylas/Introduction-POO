@@ -1,6 +1,6 @@
 <?php
 
-class Chambres{
+class Chambre{
     private string $numero; 
     private float $prix;
     private int $bedNb;
@@ -16,7 +16,7 @@ class Chambres{
         $this->wifi = $wifi;
         $this->etat= $etat;
         $this->hotel = $hotel;
-        $this->hotel->addChambres($this);
+        $this->hotel->addChambre($this);
 
     }
     
@@ -164,9 +164,9 @@ class Chambres{
 
     //ajouter une reservation :
 
-    public function addReservations(Reservations $reservations)
+    public function addReservation(Reservation $reservation)
     {
-        $this->reservations[] = $reservations;
+        $this->reservations[] = $reservation;
         
     }
 
@@ -198,6 +198,8 @@ class Chambres{
             }
             return $available;
             }
+
+        //afficher état de la chambre :
 
         public function afficherEtat(){
             if ($this->etat === true) {

@@ -141,14 +141,16 @@ class Hotel{
         return $this;
     }
 
-    public function addChambres(Chambres $chambre){
+    //ajout d'une chambre
+
+    public function addChambre(Chambre $chambre){
         $this->chambres[] = $chambre;
     }
 
     /**
      * Get the value of reservations
      */ 
-    public function getReservations()
+    public function getReservation()
     {
         return $this->reservations;
     }
@@ -158,7 +160,7 @@ class Hotel{
      *
      * @return  self
      */ 
-    public function setReservations($reservations)
+    public function setReservation($reservations)
     {
         $this->reservations = $reservations;
 
@@ -169,17 +171,17 @@ class Hotel{
 
     public function getInfos(){
         return "<div class='container'><h3>".$this."</h3>".
-                "<div class='adresse'><p>".$this->afficherAdress()."</p></div><hr>".
-                "<p class='infochambre'>Nombre de chambres : ".count($this->chambres)."</p>".
-                "<p class='infochambre'>Nombre de chambres réservées : ".count($this->reservations)."</p>".
-                "<p class='infochambre'>Nombre de chambres disponibles : ".count($this->chambres) - count($this->reservations)."</p></div>";
+                "<div class='adresse'><p>".$this->afficherAdress()."</p></div><hr><br>".
+                "<p class='infochambre'>Nombre de chambres : ".count($this->chambres)."</p><br>".
+                "<p class='infochambre'>Nombre de chambres réservées : ".count($this->reservations)."</p><br>".
+                "<p class='infochambre'>Nombre de chambres disponibles : ".count($this->chambres) - count($this->reservations)."</p><br></div>";
     } 
 
     //ajouter réservation :
 
-    public function addReservations(Reservations $reservations)
+    public function addReservation(Reservation $reservation)
     {
-        $this->reservations[] = $reservations;
+        $this->reservations[] = $reservation;
 
     }
 
@@ -196,14 +198,14 @@ class Hotel{
 
     //Afficher réservations :
 
-    public function afficherReservations(){
-        $result = "<div class='container'><h3>$this</h3><hr>".
-                        "<p class='nbresa'>".count($this->reservations)." Réservations :</p>";
+    public function afficherReservation(){
+        $result = "<div class='container'><h3>$this</h3><hr><br>".
+                        "<p class='nbresa'>".count($this->reservations)." Réservations :</p><br>";
                     if(empty($this->reservations)){
-                        $result .="<p>Aucune réservations</p>";
+                        $result .="<p>Aucune réservations</p><br>";
                     } else {
                         foreach($this->reservations as $reservation){
-                            $result .= "<p>Client :".$reservation->getClients()."-".$reservation->getChambres()->afficherNumero()."</p>";
+                            $result .= "<p>Client :".$reservation->getClient()." - ".$reservation->getChambre()->afficherNumero()."</p><br>";
                         }
                     }
                     return $result."</div>";

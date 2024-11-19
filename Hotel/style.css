@@ -16,6 +16,7 @@
         text-align: center;
     }
     .main-title{
+        color: rgba(54, 164, 168, 0.897);
         font-size: xx-large;
         font-weight: 600;
     }

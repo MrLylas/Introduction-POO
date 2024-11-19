@@ -1,17 +1,17 @@
 <?php
 
-class Reservations{
-    private Chambres $chambre;
-    private Clients $clients;
+class Reservation{
+    private Chambre $chambre;
+    private Client $client;
     private DateTime $checkIn;
     private DateTime $checkOut;
     
-    public function __construct(Chambres $chambre ,Clients $clients, string $checkIn,string $checkOut){
+    public function __construct(Chambre $chambre ,Client $client, string $checkIn,string $checkOut){
         $this->chambre = $chambre;
-        $this->chambre->addReservations($this);
-        $this->chambre->getHotel()->addReservations($this);
-        $this->clients = $clients;
-        $this->clients->addReservations($this);
+        $this->chambre->addReservation($this);
+        $this->chambre->getHotel()->addReservation($this);
+        $this->client = $client;
+        $this->client->addReservation($this);
         $this->checkIn = new dateTime($checkIn);
         $this->checkOut = new dateTime($checkOut);
     }
@@ -19,9 +19,9 @@ class Reservations{
     /**
      * Get the value of clients
      */ 
-    public function getClients()
+    public function getClient()
     {
-        return $this->clients;
+        return $this->client;
     }
     
     /**
@@ -29,9 +29,9 @@ class Reservations{
      *
      * @return  self
      */ 
-    public function setClients($clients)
+    public function setClient($client)
     {
-        $this->clients = $clients;
+        $this->client = $client;
     
         return $this;
     }
@@ -39,7 +39,7 @@ class Reservations{
     /**
      * Get the value of chambres
          */ 
-        public function getChambres()
+        public function getChambre()
         {
             return $this->chambre;
         }
@@ -49,7 +49,7 @@ class Reservations{
          *
          * @return  self
          */ 
-        public function setChambres($chambre)
+        public function setChambre($chambre)
         {
             $this->chambre = $chambre;
     

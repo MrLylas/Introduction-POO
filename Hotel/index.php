@@ -28,44 +28,43 @@ $regent = new Hotel("Regent","***","Paris","61 rue Dauphine","75006");
 
 //Chambres :
 
-$chambre1 = new Chambres("Chambre 1",120,2, false,false,$hilton);
-$chambre2 = new Chambres("Chambre 2",120,2, false,false,$hilton);
-$chambre3 = new Chambres("Chambre 3",120,2, true,true,$hilton);
-$chambre4 = new Chambres("Chambre 4",120,2, false,true,$hilton);
-$chambre5 = new Chambres("Chambre 5",120,2, false,false,$hilton);
-$chambre6 = new Chambres("Chambre 6",120,2, false,true,$hilton);
-$chambre7 = new Chambres("Chambre 7",120,2, false,false,$hilton);
-$chambre8 = new Chambres("Chambre 8",120,2, false,false,$hilton);
-$chambre9 = new Chambres("Chambre 9",120,2, false,true,$hilton);
-$chambre10 = new Chambres("Chambre 10",120,2, false,false,$hilton);
-$chambre11 = new Chambres("Chambre 11",120,2, false,false,$hilton);
-$chambre12 = new Chambres("Chambre 12",120,2, false,true,$hilton);
-$chambre13 = new Chambres("Chambre 13",120,2, false,false,$hilton);
-$chambre14 = new Chambres("Chambre 14",120,2, false,true,$hilton);
-$chambre15 = new Chambres("Chambre 15",120,2, false,true,$hilton);
-$chambre16 = new Chambres("Chambre 16",300,2, true,true,$hilton);
-$chambre17 = new Chambres("Chambre 17",300,2, false,true,$hilton);
-$chambre18 = new Chambres("Chambre 18",300,2, true,false,$hilton);
-$chambre19 = new Chambres("Chambre 19",300,2, true,false,$hilton);
+$chambre1 = new Chambre("Chambre 1",120,2, false,false,$hilton);
+$chambre2 = new Chambre("Chambre 2",120,2, false,false,$hilton);
+$chambre3 = new Chambre("Chambre 3",120,2, true,true,$hilton);
+$chambre4 = new Chambre("Chambre 4",120,2, false,true,$hilton);
+$chambre5 = new Chambre("Chambre 5",120,2, false,false,$hilton);
+$chambre6 = new Chambre("Chambre 6",120,2, false,true,$hilton);
+$chambre7 = new Chambre("Chambre 7",120,2, false,false,$hilton);
+$chambre8 = new Chambre("Chambre 8",120,2, false,false,$hilton);
+$chambre9 = new Chambre("Chambre 9",120,2, false,true,$hilton);
+$chambre10 = new Chambre("Chambre 10",120,2, false,false,$hilton);
+$chambre11 = new Chambre("Chambre 11",120,2, false,false,$hilton);
+$chambre12 = new Chambre("Chambre 12",120,2, false,true,$hilton);
+$chambre13 = new Chambre("Chambre 13",120,2, false,false,$hilton);
+$chambre14 = new Chambre("Chambre 14",120,2, false,true,$hilton);
+$chambre15 = new Chambre("Chambre 15",120,2, false,true,$hilton);
+$chambre16 = new Chambre("Chambre 16",300,2, true,true,$hilton);
+$chambre17 = new Chambre("Chambre 17",300,2, false,true,$hilton);
+$chambre18 = new Chambre("Chambre 18",300,2, true,false,$hilton);
+$chambre19 = new Chambre("Chambre 19",300,2, true,false,$hilton);
 
 //Clients :
-
-$client1 = new Clients("Micka","Murmann");
-$client2 = new Clients("Virgile","Gibello");
+$client1 = new Client("Micka","Murmann");
+$client2 = new Client("Virgile","Gibello");
 
 //Reservations :
 
-$resa1 =new Reservations($chambre17,$client2,"01-01-2021","01-01-2021");
-$resa2 =new Reservations($chambre3,$client1,"11-03-2021","11-03-2021");
-$resa3 =new Reservations($chambre4,$client1,"01-04-2021","01-04-2021");
+$resa1 =new Reservation($chambre17,$client2,"01-01-2021","01-01-2021");
+$resa2 =new Reservation($chambre3,$client1,"11-03-2021","11-03-2021");
+$resa3 =new Reservation($chambre4,$client1,"01-04-2021","01-04-2021");
 
 
 
 
 echo $hilton->getInfos();
-echo $hilton->afficherReservations();
-echo $regent->afficherReservations();
-echo $client1->afficherReservations();
+echo $hilton->afficherReservation();
+echo $regent->afficherReservation();
+echo $client1->afficherReservation();
 echo $hilton->afficherStatut();
 
 

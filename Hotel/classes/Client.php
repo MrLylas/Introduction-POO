@@ -1,6 +1,6 @@
 <?php
 
-class Clients{
+class Client{
     private string $prenom;
     private string $nom;
     private array $reservations;
@@ -56,7 +56,7 @@ class Clients{
     /**
      * Get the value of reservations
      */ 
-    public function getReservations()
+    public function getReservation()
     {
         return $this->reservations;
     }
@@ -66,7 +66,7 @@ class Clients{
      *
      * @return  self
      */ 
-    public function setReservations($reservations)
+    public function setReservation($reservations)
     {
         $this->reservations = $reservations;
 
@@ -78,9 +78,9 @@ class Clients{
      *
      * 
      */ 
-    public function addReservations(Reservations $reservations)
+    public function addReservation(Reservation $reservation)
     {
-        $this->reservations[] = $reservations;
+        $this->reservations[] = $reservation;
 
     }
 
@@ -91,35 +91,19 @@ class Clients{
         return "$this->prenom $this->nom";
     }
 
-    //fonction de calcul temps de séjour :
-
-    public function calculerSejour()
-    {
-        $total = 0;
-        foreach ($this->reservations as $reservation) {
-            $arrive = $reservation->getcheckIn();
-            $depart = $reservation->getcheckOut();
-            $interval = $arrive->diff($depart);
-
-            $total += $interval->d * $reservation->getChambres()->getPrix();
-        }
-        return $total;
-    }
-
     //afficher les réservations clients :
 
-    public function afficherReservations()
+    public function afficherReservation()
     {
-        $result = "<div class='container'><h3>Réservations de $this</h3><hr>
-                    <p class='nbresa'>" . count($this->reservations) . " Réservations</p>";
+        $result = "<div class='container'><h3>Réservations de $this</h3><hr><br>
+                    <p class='nbresa'>" . count($this->reservations) . " Réservations</p><br>";
         if (empty($this->reservations)) {
             $result .= "<p>Aucune réservations !</p>";
         } else {
             foreach ($this->reservations as $reservation) {
-                $result .= "<p><span>Hotel : " . $reservation->getChambres()->getHotel() . "</span> / " . $reservation->getChambres()->afficherNumero() . " " . $reservation->getChambres()->getRoomInfos() . " " . $reservation->afficherDates() . "</p>";
+                $result .= "<p><span>Hotel : " . $reservation->getChambre()->getHotel() . "</span> / " . $reservation->getChambre()->afficherNumero() . "<br>" . $reservation->getChambre()->getRoomInfos() . " " . $reservation->afficherDates() . "</p><br>";
             }
         }
-        $result .= "Total : " . $this->calculerSejour() . " €";
         return $result."</div>";
     }
 }
