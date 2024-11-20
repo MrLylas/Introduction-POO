@@ -96,16 +96,17 @@ class Client{
 
     public function afficherReservation()
     {
-        $result = "<div><h3>Réservations de $this</h3><hr><br>
+        $result = "<div class='hotel-container'><h3>Réservations de $this</h3><hr><br>
                     <p class='nbresa'>" . count($this->reservations) . " Réservations</p><br>";
         if (empty($this->reservations)) {
             $result .= "<p>Aucune réservations !</p>";
         } else {
             foreach ($this->reservations as $reservation) {
-                $result .= "<p><span>Hotel : " . $reservation->getChambre()->getHotel() . "</span> / " . $reservation->getChambre()->afficherNumero() . "<br>" . $reservation->getChambre()->getRoomInfos() . " " . $reservation->afficherDates() . "</p></div><br>";
+                $result .= "<p><span>Hotel : " . $reservation->getChambre()->getHotel() . "</span> / " . $reservation->getChambre()->afficherNumero() . "<br>" . $reservation->getChambre()->getRoomInfos() . " " . $reservation->afficherDates() . "</p><br>
+                Total :".$this->prixTotalClient();
             }
         }
-        return $result;
+        return $result."</div>";
     }
 
     public function prixTotalClient(){

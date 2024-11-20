@@ -8,7 +8,6 @@ class Hotel{
     private string $adress;
     private string $postal;
     private array $chambres;
-    // private array $reservations;
     
     public function __construct(string $hotelName,string $stars,string $ville, string $adress,string $postal){
         $this->hotelName = $hotelName;
@@ -17,7 +16,6 @@ class Hotel{
         $this->adress = $adress;
         $this->postal = $postal;
         $this->chambres = [];
-        // $this->reservations = [];
     }
      
 
@@ -146,26 +144,6 @@ class Hotel{
     public function addChambre(Chambre $chambre){
         $this->chambres[] = $chambre;
     }
-
-    /**
-     * Get the value of reservations
-     */ 
-    public function getReservation()
-    {
-        return $this->reservations;
-    }
-
-    /**
-     * Set the value of reservations
-     *
-     * @return  self
-     */ 
-    public function setReservation($reservations)
-    {
-        $this->reservations = $reservations;
-
-        return $this;
-    }
     
     //Afficher réservations :
 
@@ -189,9 +167,9 @@ class Hotel{
     //Récuperer infos sur l'hotel et sa disponibilité :
     
     public function getInfos(){
-        return "<h3>".$this."</h3>".
+        return "<div class='hotel-container'><h3>".$this."</h3>".
                 "<p>".$this->afficherAdress()."</p><hr><br>".
-                "".$this->afficherReservation()."";
+                "".$this->afficherReservation()."</div>";
     } 
 
     public function __toString()
@@ -215,15 +193,15 @@ class Hotel{
                 <th scope='col'>PRIX</th>
                 <th scope='col'>WIFI</th>
                 <th scope='col'>ETAT</th>
-            </tr>
+            </tr></div>
         </thead>
         <tbody>";
         foreach($this->chambres as $chambre){   
         $result .= "<tr>
-                    <td>".$chambre->afficherNumero()."</td>
-                    <td>".$chambre->getPrix()."€</td>
-                    <td>".$chambre->afficherIcon()."</td>
-                    <td>".$chambre->afficherEtat()."</td>";
+                        <td>".$chambre->afficherNumero()."</td>
+                        <td>".$chambre->getPrix()."€</td>
+                        <td>".$chambre->afficherIcon()."</td>
+                        <td>".$chambre->afficherEtat()."</td>";
         }
         $result .= "</tr></tbody></table>";
         return $result;

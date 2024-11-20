@@ -55,8 +55,8 @@ $client2 = new Client("Virgile","Gibello");
 //Reservations :
 
 $resa1 =new Reservation($chambre17,$client2,"01-01-2021","01-01-2021");
-$resa2 =new Reservation($chambre3,$client1,"11-03-2021","11-03-2021");
-$resa3 =new Reservation($chambre4,$client1,"01-04-2021","15-04-2021");
+$resa2 =new Reservation($chambre3,$client1,"11-03-2021","15-03-2021");
+$resa3 =new Reservation($chambre4,$client1,"11-04-2021","17-04-2021");
 
 
 
@@ -65,5 +65,4 @@ echo $hilton->getInfos();
 echo $regent->getInfos();
 echo $client1->afficherReservation();
 echo $hilton->afficherStatut();
-echo $client1->prixTotalClient();
 
